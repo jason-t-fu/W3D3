@@ -9,4 +9,14 @@
 #
 
 class TagTopic < ApplicationRecord
+  validates :topic, presence: true, uniqueness: true
+
+  has_many :tags,
+    primary_key: :id,
+    foreign_key: :topic_id,
+    class_name: :Tagging
+
+  has_many :urls,
+    through: :tags,
+    source: :url
 end
